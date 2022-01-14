@@ -16,26 +16,26 @@ node app
 ...
 
 ## endpints
-The root for the all the endpoint is _http://localhost:8000/api]_
-_checking server_
+The root for the all the endpoint is _http://localhost:8000/api_
+### checking server
 * /ok
 
-_Auth_
-*   (POST) /api/auth/login . 
-    _get user and token =>body: { email, password }_
-*   (GET) /api/auth/me .
-    _get user by token => headers: access-token = token_
+### Auth
+*   (POST) /api/auth/login.
+    get user and token =>body: { email, password }
+*   (GET) /api/auth/me.
+    get user by token => headers: access-token = token
 
-_User_
-*   (GET) /api/user .
-    _get all users (this endpoint can resive query params)_
-*   (GET) /api/user/:id .
-    _get user by id_
-*   PUT) /api/user .
-    _update user data => body: {name,img,role,state}_
-*   (POST) /api/user .
-    _create user => body: { name, email, password, role }_
-*   (DELETE) /api/user/:id (recomended) .
-    _switch the state of an user to false (this user won´t be able to log in)_
-*   (DELETE) /api/user/delete/id .
-    _delete user in our database_
+### User
+*   (GET) /api/user.
+    get all users (this endpoint can resive query params)
+*   (GET) /api/user/:id.
+    get user by id
+*   PUT) /api/user.
+    update user data => body: {name,img,role,state}
+*   (POST) /api/user.
+    create user => body: { name, email, password, role }
+*   (DELETE) /api/user/:id (recomended).
+    switch the state of an user to false (this user won´t be able to log in)
+*   (DELETE) /api/user/delete/id.
+    delete user in our database
