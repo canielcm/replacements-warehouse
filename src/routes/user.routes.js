@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { validateFields } = require("../middlewares/validateFields");
 const {
   isAValidRole,
   emailExists,
   userExistsById,
 } = require("../helpers/validationDB");
+
 const {
   userGet,
   usersGet,
@@ -14,8 +14,12 @@ const {
   userDelete,
   userDisable,
 } = require("../controllers/user.controller");
-const validateJWT = require("../middlewares/validateJWT");
-const validateRole = require("../middlewares/validateRole");
+
+const {
+  validateJWT, 
+  validateRole, 
+  validateFields
+} = require("../middlewares");
 
 const router = Router();
 
@@ -27,7 +31,6 @@ router.put(
   "/:id",
   [
     validateJWT,
-    validateRole(["ADMIN_ROLE"]),
     check("id", "Not a valid id").isMongoId(),
     check("id", "user doesn't exist").custom(userExistsById),
     check("role").custom(isAValidRole),
@@ -40,7 +43,6 @@ router.post(
   "/",
   [
     validateJWT,
-    validateRole(["ADMIN_ROLE"]),
     check("name", "name is required").not().isEmpty(),
     check(
       "password",
@@ -59,18 +61,19 @@ router.delete(
   "/:id",
   [
     validateJWT,
-    validateRole(["ADMIN_ROLE"]),
+    validateRole("ADMIN_ROLE", "USER_ROLE"),
     check("id", "It's not a valid ID").isMongoId(),
     check("id", "User not found").custom(userExistsById),
     validateFields,
   ],
   userDisable
 );
+
 router.delete(
   "/delete/:id",
   [
     validateJWT,
-    validateRole(["ADMIN_ROLE"]),
+    validateRole("ADMIN_ROLE", "USER_ROLE"),
     check("id", "It's not a valid ID").isMongoId(),
     check("id", "User not found").custom(userExistsById),
     validateFields,
