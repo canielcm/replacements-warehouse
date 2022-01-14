@@ -2,6 +2,11 @@ const Response = require("./ResponsesModel");
 const { addToDB } = require("../helpers/mongoDBFunctions");
 const Product = require("../models/product.model");
 
+//TODO:
+const generateQR = (data)=>{
+
+}
+
 const addProduct = async (req, res) => {
   try {
     let body = req.body;

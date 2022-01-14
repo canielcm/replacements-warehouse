@@ -24,7 +24,7 @@ const {
 const router = Router();
 
 router.get("/:id", userGet);
-
+//TODO: Just get user with state in true
 router.get("/", usersGet);
 
 router.put(
