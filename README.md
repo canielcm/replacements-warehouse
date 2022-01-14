@@ -28,14 +28,14 @@ _Auth_
 
 _User_
 * (GET) /api/user :
-    get all users (this endpoint can resive query params)
+    _get all users (this endpoint can resive query params)_
 * (GET) /api/user/:id :
-    get user by id
+    _get user by id_
 * (PUT) /api/user :
-    update user data => body: {name,img,role,state}
+    _update user data => body: {name,img,role,state}_
 * (POST) /api/user :
-    create user => body: { name, email, password, role }
+    _create user => body: { name, email, password, role }_
 * (DELETE) /api/user/:id (recomended):
-    switch the state of an user to false (this user won´t be able to log in)
+    _switch the state of an user to false (this user won´t be able to log in)_
 * (DELETE) /api/user/delete/id :
-    delete user in our database
+    _delete user in our database_
