@@ -21,21 +21,21 @@ _checking server_
 * /ok
 
 _Auth_
-*   (POST) /api/auth/login _:_ 
+*   (POST) /api/auth/login . 
     _get user and token =>body: { email, password }_
-*   (GET) /api/auth/me _:_ 
+*   (GET) /api/auth/me .
     _get user by token => headers: access-token = token_
 
 _User_
-*   (GET) /api/user _:_
+*   (GET) /api/user .
     _get all users (this endpoint can resive query params)_
-*   (GET) /api/user/:id _:_
+*   (GET) /api/user/:id .
     _get user by id_
-*   PUT) /api/user _:_
+*   PUT) /api/user .
     _update user data => body: {name,img,role,state}_
-*   (POST) /api/user _:_
+*   (POST) /api/user .
     _create user => body: { name, email, password, role }_
-*   (DELETE) /api/user/:id (recomended) _:_
+*   (DELETE) /api/user/:id (recomended) .
     _switch the state of an user to false (this user won´t be able to log in)_
-*   (DELETE) /api/user/delete/id _:_
+*   (DELETE) /api/user/delete/id .
     _delete user in our database_
