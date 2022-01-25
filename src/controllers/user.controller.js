@@ -59,8 +59,7 @@ const userPost = async (req, res) => {
 //UPDATE USER
 const userPut = async (req, res) => {
   const { id } = req.params;
-  let { _id, password, google, email, ...rest } = req.body;
-  // TODO validating againts DB
+  let { _id, password, email, ...rest } = req.body;
   if (password) {
     password = await bcrypt.hash(password, 10);
   }
@@ -82,7 +81,7 @@ const userDelete = async (req, res) => {
     const id = req.params.id;
     let userDeleted = await deleteItem(User, id);
     userDeleted
-      ? res.status(200).json(Response._200(userDelete, "user was deleted"))
+      ? res.status(200).json(Response._200(userDeleted, "user was deleted"))
       : res.status(404).json(Response._404("User not deleted"));
   } catch (error) {
     res.status(500).json(Response._500(error));

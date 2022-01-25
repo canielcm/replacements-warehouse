@@ -39,3 +39,5 @@ The root for the all the endpoint is _http://localhost:8000/api_
         switch the state of an user to false (this user won´t be able to log in)
 *       (DELETE) /api/user/delete/id.
         delete user in our database
+
+
