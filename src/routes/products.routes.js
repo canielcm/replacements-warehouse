@@ -9,15 +9,6 @@ const {
   productDisable,
 } = require("../controllers/products.controller");
 
-/* 
-  addProduct,
-  productGet,
-  productsGet,
-  productPut,
-  productDelete,
-  productDisable,
-*/
-
 router.get("/:id", productGet);
 router.get("/", productsGet);
 router.post("/", addProduct);

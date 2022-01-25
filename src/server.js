@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan"); //DEV
+
 const { dbConnection } = require("./database/config");
 class Server {
   constructor() {
@@ -37,8 +37,7 @@ class Server {
     this.app.use(cors());
     // Reading and parsing of body
     this.app.use(express.json());
-    // Whatch in console http request
-    this.app.use(morgan('dev')); //DEV
+    
   }
 
   listen() {
