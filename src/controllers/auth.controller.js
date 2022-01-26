@@ -37,8 +37,18 @@ const getCurrentUser = async (req, res) => {
 };
 
 const refreshToken = async (req, res)=>{
-  res.json(req);
+  const {uid} = req;
+
+  const token = await generateJWT(uid);
+
+  res.status(200).json({
+    ok: true,
+    uid,
+    name: req.user.name,
+    token
+  });
 }
+
 module.exports = {
   login,
   getCurrentUser,
