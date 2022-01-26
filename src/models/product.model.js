@@ -11,7 +11,7 @@ const ProductSchema = Schema({
   //SKU: stock keeping unit / reference number
   SKU: stringSchema({ unique: true }, true),
 
-  state: { type: Boolean, default:true },
+  status: { type: Boolean, default:true },
 
   amount: numberSchema(),
 

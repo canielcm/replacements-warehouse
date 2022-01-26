@@ -92,7 +92,7 @@ const userDelete = async (req, res) => {
 const userDisable = async (req, res) => {
   try {
     const id = req.params.id;
-    let user = await uptateItem(User, id, { state: false });
+    let user = await uptateItem(User, id, { status: false });
     const uid = req.uid;
     const authUser = req.user;
     res

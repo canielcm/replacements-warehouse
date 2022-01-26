@@ -6,6 +6,7 @@ const {
   uptateItem,
   deleteItem,
 } = require("../helpers/mongoDBFunctions");
+
 //TODO:
 const generateQR = (data) => {};
 
@@ -13,14 +14,10 @@ const generateQR = (data) => {};
 const productGet = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("log 1");
-    
     const product = await getItems(Product, id);
-    console.log("log 2");
     product
       ? res.status(200).json(Response._200(product))
       : res.status(404).json(Response._404("Product not found"));
-      console.log("log 3");
   } catch (error) {
     res.status(500).json(Response._500(error));
   }
@@ -80,9 +77,7 @@ const productDelete = async (req, res) => {
     const id = req.params.id;
     let productDeleted = await deleteItem(Product, id);
     productDeleted
-      ? res
-          .status(200)
-          .json(Response._200(productDeleted, "product was deleted"))
+      ? res.status(200).json(Response._200(productDeleted, "product was deleted"))
       : res.status(404).json(Response._404("product not deleted"));
   } catch (error) {
     res.status(500).json(Response._500(error));
@@ -93,7 +88,7 @@ const productDelete = async (req, res) => {
 const productDisable = async (req, res) => {
   try {
     const id = req.params.id;
-    let product = await uptateItem(Product, id, { state: false });
+    let product = await uptateItem(Product, id, { status: false });
     res
       .status(200)
       .json(

@@ -14,8 +14,8 @@ const validateJWT = async (req, res, next) => {
     const authUser = await getItems(User,uid);
     //verify user
     if(!authUser) return res.status(401).json(Response._400('User doesn\'t excist in Database'));
-    //verify user state
-    if(!authUser.state)return res.status(401).json(Response._400('User is unauthorized'));
+    //verify user status
+    if(!authUser.status)return res.status(401).json(Response._400('User is unauthorized'));
     req.user = authUser;
     next();
   } catch (error) {

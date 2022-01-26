@@ -5,15 +5,15 @@ This is an API based on a replacements warehouse, acting as Business Manager. Th
 Add file _.env_ and copy the variables on  _prod.env_ , then set values for "MONGODB_CNN" (connection MONGODB atlas) and "SECRETKEY" (Whatever you want to sign your JWT).
 
 ## to start
-...
-    npm start
-...
+
+        npm start
+
 
 _or_
 
-...
-    node app
-...
+
+        node app
+
 
 ## endpoints
 The root for the all the endpoint is _http://localhost:8000/api_

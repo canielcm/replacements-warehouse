@@ -10,11 +10,9 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     let user = await getItems(User, null, { email });
     user = user[0];
-
-    if (!user || (user && !user.state)) {
+    if (!user || (user && !user.status)) {
       return res.status(400).json(Response._400("Email is wrong"));
     }
-
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
       return res.status(400).json(Response._400("Password is Wrong"));
@@ -34,11 +32,15 @@ const getCurrentUser = async (req, res) => {
     res.status(200).json(Response._200(authUser));
   } catch (error) {
     console.log(error);
-
     res.status(500).json(Response._500(error));
   }
 };
+
+const refreshToken = async (req, res)=>{
+  res.json(req);
+}
 module.exports = {
   login,
   getCurrentUser,
+  refreshToken
 };
