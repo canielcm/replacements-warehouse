@@ -8,7 +8,7 @@ const ProductSchema = Schema({
 
   category: stringSchema(null, true),
 
-  //SKU: stock keeping unit / reference number
+  //SKU: stock keeping unit / reference code
   SKU: stringSchema({ unique: true }, true),
 
   status: { type: Boolean, default:true },

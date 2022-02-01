@@ -2,14 +2,13 @@ const bcryptjs = require("bcryptjs");
 const Response = require("./ResponsesModel");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
-const { getItems } = require("../helpers/mongoDBFunctions");
+const { getItem } = require("../helpers/mongoDBFunctions");
 const { generateJWT } = require("../helpers/generateJWT");
 
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    let user = await getItems(User, null, { email });
-    user = user[0];
+    let user = await getItem(User, null, { email });
     if (!user || (user && !user.status)) {
       return res.status(400).json(Response._400("Email is wrong"));
     }

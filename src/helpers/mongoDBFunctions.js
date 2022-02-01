@@ -8,6 +8,16 @@ const getItems = async (ModelInstance, ID, data) => {
   } catch (error) {}
 };
 
+const getItem = async (ModelInstance, ID, data) => {
+  try {
+    let itemResult;
+    !ID && !data ? (itemResult = await ModelInstance.find({})) : null;
+    ID ? (itemResult = await ModelInstance.findById(ID).exec()) : null;
+    data ? (itemResult = await ModelInstance.findOne(data).exec()) : null;
+    return itemResult;
+  } catch (error) {}
+};
+
 const addToDB = async (ModelInstance, data) => {
   try {
     const item = new ModelInstance(data);
@@ -49,4 +59,5 @@ module.exports = {
   addToDB,
   uptateItem,
   deleteItem,
+  getItem
 };

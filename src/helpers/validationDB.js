@@ -1,5 +1,6 @@
 const Role = require("../models/role.model");
 const User = require("../models/user.model");
+const Customer = require("../models/customer.model");
 
 const isAValidRole = async (role = "") => {
   const roleExists = await Role.findOne({ role });
@@ -10,6 +11,12 @@ const isAValidRole = async (role = "") => {
 
 const emailExists = async (email = "") => {
   const emailExists = await User.findOne({ email });
+  if (emailExists) {
+    throw new Error(`Email ${email} already exists`);
+  }
+};
+const customerEmailExists = async (email = "") => {
+  const emailExists = await Customer.findOne({ email });
   if (emailExists) {
     throw new Error(`Email ${email} already exists`);
   }
@@ -26,4 +33,5 @@ module.exports = {
   isAValidRole,
   emailExists,
   userExistsById,
+  customerEmailExists
 };

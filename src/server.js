@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 
 const { dbConnection } = require("./database/config");
 class Server {
@@ -20,12 +21,18 @@ class Server {
 
   routes() {
     this.rootPath = "/api";
-    this.authPath = "/api/auth"
+    this.authPath = "/api/auth";
     this.userPath = "/api/user";
+    this.orderPath = "/api/order";
     this.productPath = "/api/product";
-    this.app.use(this.userPath, require("./routes/user.routes"));
+    this.providerPath = "/api/provider";
+    this.customerPath = "/api/customer";
     this.app.use(this.authPath, require("./routes/auth.routes"));
+    this.app.use(this.userPath, require("./routes/user.routes"));
+    this.app.use(this.orderPath, require("./routes/order.routes"));
     this.app.use(this.productPath, require("./routes/products.routes"));
+    this.app.use(this.providerPath, require("./routes/provider.routes"));
+    this.app.use(this.customerPath, require("./routes/customer.routes"));
     this.app.use(this.rootPath, require("./routes/general.routes"));
   }
 
@@ -36,7 +43,8 @@ class Server {
     this.app.use(cors());
     // Reading and parsing of body
     this.app.use(express.json());
-    
+    //Morgan
+    this.app.use(morgan("dev"));
   }
 
   listen() {
