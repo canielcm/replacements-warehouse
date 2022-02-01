@@ -59,12 +59,17 @@ const addProduct = async (req, res) => {
 const productPut = async (req, res) => {
   const { id } = req.params;
   let { _id, QR, SKU, ...rest } = req.body;
-  const product = await uptateItem(Product, id, rest);
+  let product = await uptateItem(Product, id, rest);
+  const newProductData = rest;
+  const newProduct = {
+    ...product._doc,
+    ...newProductData
+  }
   res.status(200).json(
     Response._200(
       {
         id,
-        product,
+        newProduct
       },
       "product updated"
     )

@@ -58,11 +58,16 @@ const providerPut = async (req, res) => {
   const { id } = req.params;
   let { _id, QR, SKU, ...rest } = req.body;
   const provider = await uptateItem(Provider, id, rest);
+  const newProviderData = rest;
+  const newProvider = {
+    ...provider._doc,
+    ...newProviderData
+  }
   res.status(200).json(
     Response._200(
       {
         id,
-        provider,
+        newProvider
       },
       "provider updated"
     )

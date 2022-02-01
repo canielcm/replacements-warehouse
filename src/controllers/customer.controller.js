@@ -58,11 +58,15 @@ const customerPut = async (req, res) => {
   const { id } = req.params;
   let { _id, QR, SKU, ...rest } = req.body;
   const customer = await uptateItem(Customer, id, rest);
+  const newCustomerData = rest;
+  const newCustomer = {
+    ...customer._doc,
+    ...newCustomerData
+  }
   res.status(200).json(
     Response._200(
-      {
-        id,
-        customer,
+      { id,
+        newCustomer
       },
       "customer updated"
     )

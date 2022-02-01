@@ -31,29 +31,31 @@ const getProductsDataArray = async (products) => {
   try {
     const productsData = [];
     for (const product of products) {
-      const productInfo = await getItem(Product, product.idProduct);
-      productInfo.amountAvailable = productInfo.amount;
-      productInfo.amount = product.amount;
-      productInfo.codes = product.codes;
-      productInfo.total = productInfo.amount * productInfo.price;
-      const {
-        _id: id,
-        SKU,
-        name,
-        amount,
-        codes,
-        total,
-        amountAvailable,
-      } = productInfo;
-      productsData.push({
-        id,
-        SKU,
-        name,
-        amount,
-        codes,
-        total,
-        amountAvailable,
-      });
+      if(product.amount>0){
+        const productInfo = await getItem(Product, product.idProduct);
+        productInfo.amountAvailable = productInfo.amount;
+        productInfo.amount = product.amount;
+        productInfo.codes = product.codes;
+        productInfo.total = productInfo.amount * productInfo.price;
+        const {
+          _id: id,
+          SKU,
+          name,
+          amount,
+          codes,
+          total,
+          amountAvailable,
+        } = productInfo;
+        productsData.push({
+          id,
+          SKU,
+          name,
+          amount,
+          codes,
+          total,
+          amountAvailable,
+        });
+      }
     }
     return productsData;
   } catch (error) {

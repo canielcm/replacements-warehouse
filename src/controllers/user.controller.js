@@ -64,13 +64,18 @@ const userPut = async (req, res) => {
     password = await bcrypt.hash(password, 10);
   }
   const user = await uptateItem(User, id, rest);
+  const newUserData = rest;
+  const newUser = {
+    ...user._doc,
+    ...newUserData
+  }
   res.status(200).json(
     Response._200(
       {
         id,
-        user,
+        newUser
       },
-      "User updated"
+      "user updated"
     )
   );
 };
