@@ -1,11 +1,12 @@
 const { Schema, model } = require("mongoose");
 const {stringSchema, numberSchema} = require('./SchemaTypeModels');
 
-const PurchaseSchema = new Schema({
+const LossSchema = new Schema({
   date: {
       type: Date,
       default: Date.now
   },
+  reason: stringSchema(),
   products: {
       type: Array,
       Schema:{
@@ -16,15 +17,7 @@ const PurchaseSchema = new Schema({
           total: numberSchema(),
       }
   },
-  provider:{
-      type: {
-          name: stringSchema(null, true),
-          NIT: stringSchema(),
-          RUT: stringSchema(),
-      }
-  },
-  totalToPay: numberSchema()
-  //método y forma de pago
+  totalLost: numberSchema()
 });
 
-module.exports = model('Purchase', PurchaseSchema);
+module.exports = model('Loss', LossSchema);

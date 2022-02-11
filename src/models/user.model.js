@@ -7,7 +7,7 @@ const UserSchema = Schema({
 
   password: stringSchema(null, true),
 
-  img: stringSchema(),
+  //img: stringSchema(),
 
   role: stringSchema(null, true),
 
