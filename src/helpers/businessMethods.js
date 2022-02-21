@@ -3,9 +3,9 @@ const { getItem } = require("./mongoDBFunctions");
 
 const getDiscount = (initialPrice, discount) => {
   let price = initialPrice - initialPrice * discount;
-  const remainder  = price%50!=0;
-  if(remainder!=0){
-    price=price-remainder+50;
+  const remainder = price % 50 != 0;
+  if (remainder != 0) {
+    price = price - remainder + 50;
   }
   return price;
 };
@@ -31,12 +31,14 @@ const getProductsDataArray = async (products) => {
   try {
     const productsData = [];
     for (const product of products) {
-      if(product.amount>0){
+      if (product.amount > 0) {
         const productInfo = await getItem(Product, product.idProduct);
-        productInfo.amountAvailable = productInfo.amount;
+        product.total?null:productInfo.amountAvailable = productInfo.amount;
         productInfo.amount = product.amount;
-        productInfo.codes = product.codes;
-        productInfo.total = productInfo.amount * productInfo.price;
+        product.codes ? (productInfo.codes = product.codes) : null;
+        product.total
+          ? (productInfo.total = product.total)
+          : (productInfo.total = productInfo.amount * productInfo.price);
         const {
           _id: id,
           SKU,

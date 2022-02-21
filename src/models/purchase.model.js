@@ -23,8 +23,9 @@ const PurchaseSchema = new Schema({
           RUT: stringSchema(),
       }
   },
-  totalToPay: numberSchema()
-  //método y forma de pago
+  totalToPay: numberSchema(),
+  paymentOption: stringSchema(null, true),
+  paymentMethod: stringSchema(null, true) 
 });
 
 module.exports = model('Purchase', PurchaseSchema);

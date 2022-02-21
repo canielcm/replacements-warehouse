@@ -20,6 +20,48 @@ const makePurchase = async (req, res) => {
   session.startTransaction();
   const opts = { session}
   try {
+    /*
+    {
+      idProvider: xxxxx,
+      products: [{idProduct: xxxx, amount: 20, total: 500000}],
+      paymentOption: "Electronic bank transfers",
+      paymentMethod: "partial payment-2 instalments" 
+    }
+    */
+    const {idProvider, products, paymentOption, paymentMethod} = req.body;
+    const provider = await getItem(Provider, idProvider);
+    if(!provider){
+      await abortTransaction();
+      session.endSession();
+      return res.status(400).json("Provider not found");
+    }
+    if (!products || products.length ===0){
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(400).json('no products in the request');
+    }
+    let totalToPay = products.reduce((accumulator, element)=>accumulator+element.total, 0);
+    const productsOrderData = await getProductsDataArray(products);
+
+    const myPurchase = await Purchase.create(
+      [
+        {
+          provider,
+          products: productsOrderData,
+          totalToPay,
+          paymentOption,
+          paymentMethod
+        }
+      ],
+      opts
+    )
+    assert.ok(myPurchase, "There are problems adding the purchase to DB")
+    for(const product of products){
+      await Product.findByIdAndUpdate(product.idProduct,{$inc:{amount: product.amount}}, opts);
+    }
+    await session.commitTransaction();
+    session.endSession();
+    res.status(200).json(Response._200(myPurchase));
   } catch (error) {
       console.log(error);
       await session.abortTransaction();
