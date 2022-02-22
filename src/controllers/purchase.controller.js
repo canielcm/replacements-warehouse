@@ -5,13 +5,10 @@ const Response = require("./ResponsesModel");
 const mongoose = require("mongoose");
 const assert = require("assert");
 const {
-  addToDB,
   getItems,
-  uptateItem,
   getItem,
 } = require("../helpers/mongoDBFunctions");
 const {
-  getTotalPrice,
   getProductsDataArray,
 } = require("../helpers/businessMethods");
 
