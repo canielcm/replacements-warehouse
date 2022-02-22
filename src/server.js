@@ -28,6 +28,7 @@ class Server {
     this.providerPath = "/api/provider";
     this.customerPath = "/api/customer";
     this.purchasePath = "/api/purchase";
+    this.statisticsPath = "/api/statistics";
     this.lossPath = "/api/loss";
     this.app.use(this.authPath, require("./routes/auth.routes"));
     this.app.use(this.customerPath, require("./routes/customer.routes"));
@@ -36,6 +37,7 @@ class Server {
     this.app.use(this.productPath, require("./routes/products.routes"));
     this.app.use(this.providerPath, require("./routes/provider.routes"));
     this.app.use(this.purchasePath, require("./routes/purchase.routes"));
+    this.app.use(this.statisticsPath, require("./routes/statistics.routes"))
     this.app.use(this.userPath, require("./routes/user.routes"));
     this.app.use(this.rootPath, require("./routes/general.routes"));
   }
