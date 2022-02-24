@@ -67,13 +67,14 @@ const userPut = async (req, res) => {
   const newUserData = rest;
   const newUser = {
     ...user._doc,
-    ...newUserData
-  }
+    ...newUserData,
+  };
+  newUser.uid = newUser._id;
   res.status(200).json(
     Response._200(
       {
         id,
-        newUser
+        newUser,
       },
       "user updated"
     )
