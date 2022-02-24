@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
+const { validateJWT, validateRole } = require("../middlewares/");
+
 const router = Router();
 const {
   makeOrder,
@@ -7,8 +9,11 @@ const {
   ordersGet,
 } = require("../controllers/order.controller");
 
-router.get("/:id", orderGet);
-router.get("/", ordersGet);
-router.post("/", makeOrder);
+[validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.get("/:id", orderGet);
+[validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.get("/", ordersGet);
+[validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.post("/", makeOrder);
 
 module.exports = router;

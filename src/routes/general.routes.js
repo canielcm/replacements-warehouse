@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const router = Router();
+const { validateJWT, validateRole } = require("../middlewares/");
+
 
 router.get("/ok", (req, res)=>{
     res.status(200).json({

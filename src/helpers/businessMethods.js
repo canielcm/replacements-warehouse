@@ -33,7 +33,9 @@ const getProductsDataArray = async (products) => {
     for (const product of products) {
       if (product.amount > 0) {
         const productInfo = await getItem(Product, product.idProduct);
-        product.total?null:productInfo.amountAvailable = productInfo.amount;
+        product.total
+          ? null
+          : (productInfo.amountAvailable = productInfo.amount);
         productInfo.amount = product.amount;
         product.codes ? (productInfo.codes = product.codes) : null;
         product.total

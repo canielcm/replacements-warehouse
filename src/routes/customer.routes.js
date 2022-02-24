@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const { check } = require("express-validator");
+const { validateJWT, validateRole } = require("../middlewares/");
+
 const router = Router();
 const {
   addCustomer,
@@ -10,11 +11,17 @@ const {
   customerDisable,
 } = require("../controllers/customer.controller");
 
-router.get("/:id", customerGet);
-router.get("/", customersGet);
-router.post("/", addCustomer);
-router.put("/:id", customerPut);
-router.delete("/:id", customerDisable);
-router.delete("/delete/:id", customerDelete);
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.get("/:id", customerGet);
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.get("/", customersGet);
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.post("/", addCustomer);
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.put("/:id", customerPut);
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.delete("/:id", customerDisable);
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE", "USER_ROLE")],
+  router.delete("/delete/:id", customerDelete);
 
 module.exports = router;

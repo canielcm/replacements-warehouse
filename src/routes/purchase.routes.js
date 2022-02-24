@@ -5,16 +5,23 @@ const {
   makePurchase,
   purchaseGet,
   purchasesGet,
-//   purchasePut,
-//   purchaseDelete,
-//   purchaseDisable,
 } = require("../controllers/purchase.controller");
+const { validateJWT, validateRole } = require("../middlewares");
 
-router.get("/:id", purchaseGet);
-router.get("/", purchasesGet);
-router.post("/", makePurchase);
-// router.put("/:id", purchasePut);
-// router.delete("/:id", purchaseDisable);
-// router.delete("/delete/:id", purchaseDelete);
+router.get(
+  "/:id",
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE")],
+  purchaseGet
+);
+router.get(
+  "/",
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE")],
+  purchasesGet
+);
+router.post(
+  "/",
+  [validateJWT, validateRole("SUPER_ADMIN", "ADMIN_ROLE")],
+  makePurchase
+);
 
 module.exports = router;
