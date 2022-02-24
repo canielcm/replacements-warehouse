@@ -2,7 +2,7 @@ const bcryptjs = require("bcryptjs");
 const Response = require("./ResponsesModel");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
-const { getItem } = require("../helpers/mongoDBFunctions");
+const { getItem, getItems } = require("../helpers/mongoDBFunctions");
 const { generateJWT } = require("../helpers/generateJWT");
 
 const login = async (req, res) => {
